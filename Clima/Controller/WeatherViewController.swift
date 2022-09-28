@@ -27,8 +27,41 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
         searchTextField.endEditing(true)
     }
     
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        if textField.text != ""{
+            return true
+        }
+        
+        textField.placeholder = "Type something"
+        
+        // Create new Alert
+        let dialogMessage = UIAlertController(title: "Confirm", message: "Please, try type something", preferredStyle: .alert)
+         
+         // Create OK button with action handler
+         let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
+          })
+         
+         //Add OK button to a dialog message
+         dialogMessage.addAction(ok)
+         // Present Alert to
+         self.present(dialogMessage, animated: true, completion: nil)
+        
+        return false
+    }
+    
     @objc func textFieldShouldReturn(_ textField: UITextField) -> Bool {
             textField.resignFirstResponder() // dismiss keyboard
             return true
         }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if let city = searchTextField.text {
+            let weatherService = WeatherService()
+            weatherService.delegate = WeatherFetcherHttp()
+            
+            weatherService.getWeather(city: city)
+        }
+        
+        searchTextField.text = ""
+    }
 }
