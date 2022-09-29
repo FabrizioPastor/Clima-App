@@ -15,6 +15,6 @@ struct WeatherFetcherHttp: WeatherFetcher {
     }
     
     private func prepareURL(city: String) -> String {
-        return URL.replacingOccurrences(of: "{API key}", with: API_KEY).replacingOccurrences(of: "{city name}", with: city)
+        return URL.replacingOccurrences(of: "{API key}", with: ENV.SERVICE_API_KEY).replacingOccurrences(of: "{city name}", with: city)
     }
 }

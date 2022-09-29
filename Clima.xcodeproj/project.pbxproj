@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4997584228E51EDD009741E1 /* DEBUG-Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4997584128E51EDD009741E1 /* DEBUG-Keys.plist */; };
+		4997584428E52DED009741E1 /* PROD-Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4997584328E52DED009741E1 /* PROD-Keys.plist */; };
 		49BDD97928E3F33C00310E71 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BDD97828E3F33C00310E71 /* Constants.swift */; };
 		49BDD97B28E3F61000310E71 /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BDD97A28E3F61000310E71 /* WeatherService.swift */; };
 		49BDD97D28E3F64B00310E71 /* WeatherFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BDD97C28E3F64B00310E71 /* WeatherFetcher.swift */; };
@@ -23,6 +25,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4997584128E51EDD009741E1 /* DEBUG-Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DEBUG-Keys.plist"; sourceTree = "<group>"; };
+		4997584328E52DED009741E1 /* PROD-Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PROD-Keys.plist"; sourceTree = "<group>"; };
 		49BDD97828E3F33C00310E71 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		49BDD97A28E3F61000310E71 /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
 		49BDD97C28E3F64B00310E71 /* WeatherFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherFetcher.swift; sourceTree = "<group>"; };
@@ -97,6 +101,8 @@
 				ADAA27BE231BBFB300365194 /* Info.plist */,
 				ADAA27C5231BC02B00365194 /* dark_background.pdf */,
 				ADAA27C4231BC02B00365194 /* light_background.pdf */,
+				4997584128E51EDD009741E1 /* DEBUG-Keys.plist */,
+				4997584328E52DED009741E1 /* PROD-Keys.plist */,
 			);
 			path = Clima;
 			sourceTree = "<group>";
@@ -155,7 +161,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1100;
-				LastUpgradeCheck = 1100;
+				LastUpgradeCheck = 1400;
 				ORGANIZATIONNAME = "App Brewery";
 				TargetAttributes = {
 					ADAA27AC231BBFAF00365194 = {
@@ -187,11 +193,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				ADAA27CE231BC87F00365194 /* README.md in Resources */,
+				4997584228E51EDD009741E1 /* DEBUG-Keys.plist in Resources */,
 				ADAA27C7231BC02C00365194 /* dark_background.pdf in Resources */,
 				ADAA27BD231BBFB300365194 /* LaunchScreen.storyboard in Resources */,
 				ADAA27BA231BBFB300365194 /* Assets.xcassets in Resources */,
 				ADAA27B8231BBFAF00365194 /* Main.storyboard in Resources */,
 				ADAA27C6231BC02C00365194 /* light_background.pdf in Resources */,
+				4997584428E52DED009741E1 /* PROD-Keys.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,6 +268,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -320,6 +329,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;

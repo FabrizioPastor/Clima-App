@@ -35,3 +35,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+var ENV:  APIKeyable {
+    #if DEBUG
+    return DebugEnv()
+    #else
+    return ProdEnv()
+    #endif
+}
