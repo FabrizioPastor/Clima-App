@@ -30,6 +30,7 @@ struct WeatherFetcherHttp: WeatherFetcher {
                     
                     do {
                         let decodedData = try JSONDecoder().decode(WeatherData.self, from: safeData)
+                        print(decodedData.main.temp)
                     } catch  {
                         print(error)
                     }

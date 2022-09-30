@@ -8,4 +8,4 @@
 
 import Foundation
 
-let WEATHER_API_URL: String = "https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}"
+let WEATHER_API_URL: String = "https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}&units=metric"
