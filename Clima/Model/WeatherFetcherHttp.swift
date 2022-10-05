@@ -10,31 +10,31 @@ import Foundation
 
 //OBTENER LOS DATOS MEDIANTE HTTP
 struct WeatherFetcherHttp: WeatherFetcher {
+
+    var delegate: WeatherManagerDelegate?
     
     func fetch(city: String) {
         let urlString = prepareURL(city: city)
-        performRequest(urlString: urlString)
+        performRequest(with: urlString)
     }
     
     //REALIZA LA PETICION MEDIANTE URLSESSION Y REALIZA EL DECODE DE LA DATA DEVUELTA
-    private func performRequest(urlString: String) {
+    private func performRequest(with urlString: String) {
         
         if let url = URL(string: urlString) {
             let session = URLSession(configuration: .default)
             
             let task = session.dataTask(with: url, completionHandler: { (data: Data?, response: URLResponse?, error: Error? )  in
+                //VALIDAR SI EL SERVICIO NOS HA RETORNADO ALGÚN ERROR
                 if error != nil {
-                    print(error!)
+                    delegate?.didFailWithError(error!)
                     return
                 }
                 
                 if let safeData = data {
                     
-                    do {
-                        let decodedData = try JSONDecoder().decode(WeatherData.self, from: safeData)
-                        print(decodedData.main.temp)
-                    } catch  {
-                        print(error)
+                    if let weather = parseJSON(safeData){
+                        delegate?.didUpdateWeather(self, weather: weather)
                     }
                     
                 }
@@ -42,6 +42,23 @@ struct WeatherFetcherHttp: WeatherFetcher {
             
             task.resume()
         }
+    }
+    
+    private func parseJSON(_ weatherData: Data) ->  WeatherModel? {
+        
+        do {
+            let decodedData = try JSONDecoder().decode(WeatherData.self, from: weatherData)
+            let id = decodedData.weather[0].id
+            let temp = decodedData.main.temp
+            let name = decodedData.name
+            
+            let weather = WeatherModel(conditionId: id, cityName: name, temperature: temp)
+            return weather
+        } catch  {
+            delegate?.didFailWithError(error)
+            return nil
+        }
+        
     }
     
     //FORMATEA LA URL A LA QUE SE LE REALIZARÁ LA PETICION, ESTA ESTA ALOJADA EN CONSTANTS.SWIFT

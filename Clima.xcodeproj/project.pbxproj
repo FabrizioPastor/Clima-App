@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4976955628ED2DAE00B4FAB7 /* ApiKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4976955528ED2DAD00B4FAB7 /* ApiKey.swift */; };
+		4976955828ED31AB00B4FAB7 /* WeatherManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4976955728ED31AB00B4FAB7 /* WeatherManagerDelegate.swift */; };
 		4997584228E51EDD009741E1 /* DEBUG-Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4997584128E51EDD009741E1 /* DEBUG-Keys.plist */; };
 		4997584428E52DED009741E1 /* PROD-Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4997584328E52DED009741E1 /* PROD-Keys.plist */; };
 		4997584628E5562F009741E1 /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4997584528E5562F009741E1 /* WeatherData.swift */; };
@@ -30,6 +31,7 @@
 
 /* Begin PBXFileReference section */
 		4976955528ED2DAD00B4FAB7 /* ApiKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKey.swift; sourceTree = "<group>"; };
+		4976955728ED31AB00B4FAB7 /* WeatherManagerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherManagerDelegate.swift; sourceTree = "<group>"; };
 		4997584128E51EDD009741E1 /* DEBUG-Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DEBUG-Keys.plist"; sourceTree = "<group>"; };
 		4997584328E52DED009741E1 /* PROD-Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PROD-Keys.plist"; sourceTree = "<group>"; };
 		4997584528E5562F009741E1 /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 			isa = PBXGroup;
 			children = (
 				49BDD97C28E3F64B00310E71 /* WeatherFetcher.swift */,
+				4976955728ED31AB00B4FAB7 /* WeatherManagerDelegate.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -230,6 +233,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4976955828ED31AB00B4FAB7 /* WeatherManagerDelegate.swift in Sources */,
 				49BDD97D28E3F64B00310E71 /* WeatherFetcher.swift in Sources */,
 				49BDD97F28E3F70500310E71 /* WeatherFetcherHttp.swift in Sources */,
 				49D48AF628E69228007B25B5 /* IconWeatherService.swift in Sources */,

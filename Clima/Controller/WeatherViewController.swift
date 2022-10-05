@@ -9,16 +9,19 @@
 import UIKit
 
 //UITextFieldDelefate es un protocol (interfaz)
-class WeatherViewController: UIViewController, UITextFieldDelegate {
-
+class WeatherViewController: UIViewController, UITextFieldDelegate, WeatherManagerDelegate {
+    
     @IBOutlet weak var conditionImageView: UIImageView!
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var cityLabel: UILabel!
     
     @IBOutlet weak var searchTextField: UITextField!
+    
+    var weatherFethcerHttp = WeatherFetcherHttp()
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        weatherFethcerHttp.delegate = self
         searchTextField.delegate = self
     }
 
@@ -47,10 +50,7 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         //HACIENDO USO DEL PATRON DELEGADO
         if let city = searchTextField.text {
-            let weatherService = WeatherService()
-            weatherService.delegate = WeatherFetcherHttp() //PASANDO IMPLEMENTACIÓN CON HTTP
-            
-            weatherService.getWeather(city: city)
+            weatherFethcerHttp.fetch(city: city)
         }
         
         searchTextField.text = ""
@@ -70,6 +70,14 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
          // Present Alert to
          self.present(dialogMessage, animated: true, completion: nil)
         
+    }
+    
+    func didUpdateWeather(_ weatherFetcherHttp: WeatherFetcherHttp ,weather: WeatherModel) {
+        
+    }
+    
+    func didFailWithError(_ error: Error) {
+        print(error)
     }
 }
 
