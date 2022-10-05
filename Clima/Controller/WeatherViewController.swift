@@ -28,11 +28,35 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        if textField.text != ""{
+        if textField.text != "" {
             return true
         }
         
         textField.placeholder = "Type something"
+        
+        showAlertEmtySearch()
+        
+        return false
+    }
+    
+    @objc func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+            textField.resignFirstResponder() // dismiss keyboard
+            return true
+        }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        //HACIENDO USO DEL PATRON DELEGADO
+        if let city = searchTextField.text {
+            let weatherService = WeatherService()
+            weatherService.delegate = WeatherFetcherHttp() //PASANDO IMPLEMENTACIÓN CON HTTP
+            
+            weatherService.getWeather(city: city)
+        }
+        
+        searchTextField.text = ""
+    }
+    
+    func showAlertEmtySearch(){
         
         // Create new Alert
         let dialogMessage = UIAlertController(title: "Confirm", message: "Please, try type something", preferredStyle: .alert)
@@ -46,67 +70,6 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
          // Present Alert to
          self.present(dialogMessage, animated: true, completion: nil)
         
-        return false
-    }
-    
-    @objc func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-            textField.resignFirstResponder() // dismiss keyboard
-            return true
-        }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        if let city = searchTextField.text {
-            let weatherService = WeatherService()
-            weatherService.delegate = WeatherFetcherHttp()
-            
-            weatherService.getWeather(city: city)
-        }
-        
-        searchTextField.text = ""
     }
 }
 
-protocol APIKeyable {
-    var SERVICE_API_KEY: String { get }
-}
-
-class BaseEnv {
-    
-    let dict: NSDictionary
-    
-    init(resourceName: String) {
-        guard let filePath = Bundle.main.path(forResource: resourceName, ofType: "plist"), let plist = NSDictionary(contentsOfFile: filePath) else {
-            fatalError("Couldn't find the file plist")
-        }
-        
-        self.dict = plist
-    }
-}
-
-class DebugEnv: BaseEnv, APIKeyable {
-    
-    init() {
-        super.init(resourceName: "DEBUG-Keys")
-    }
-    
-    var SERVICE_API_KEY: String {
-        dict.object(forKey: "SERVICE_API_KEY") as? String ?? ""
-    }
-    
-    
-    
-}
-
-class ProdEnv: BaseEnv, APIKeyable {
-    
-    init() {
-        super.init(resourceName: "PROD-Keys")
-    }
-    
-    var SERVICE_API_KEY: String {
-        dict.object(forKey: "SERVICE_API_KEY") as? String ?? ""
-    }
-    
-    
-    
-}

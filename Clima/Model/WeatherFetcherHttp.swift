@@ -8,6 +8,7 @@
 
 import Foundation
 
+//OBTENER LOS DATOS MEDIANTE HTTP
 struct WeatherFetcherHttp: WeatherFetcher {
     
     func fetch(city: String) {
@@ -15,6 +16,7 @@ struct WeatherFetcherHttp: WeatherFetcher {
         performRequest(urlString: urlString)
     }
     
+    //REALIZA LA PETICION MEDIANTE URLSESSION Y REALIZA EL DECODE DE LA DATA DEVUELTA
     private func performRequest(urlString: String) {
         
         if let url = URL(string: urlString) {
@@ -42,7 +44,7 @@ struct WeatherFetcherHttp: WeatherFetcher {
         }
     }
     
-    
+    //FORMATEA LA URL A LA QUE SE LE REALIZARÁ LA PETICION, ESTA ESTA ALOJADA EN CONSTANTS.SWIFT
     private func prepareURL(city: String) -> String {
         return WEATHER_API_URL.replacingOccurrences(of: "{API key}", with: ENV.SERVICE_API_KEY).replacingOccurrences(of: "{city name}", with: city)
     }

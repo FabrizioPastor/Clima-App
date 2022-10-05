@@ -8,6 +8,7 @@
 
 import Foundation
 
+//SERVICIO QUE RECIBIRA UN DELEGADO PARA OBTENER EL CLIMA POR CUALQUIER IMPLEMENTACION X
 class WeatherService {
     var delegate: WeatherFetcher?
     

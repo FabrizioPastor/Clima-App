@@ -8,16 +8,18 @@
 
 import Foundation
 
-struct WeatherData: Decodable {
+//REPRESENTACION DE MI MODELO DE DATOS
+//CODEABLE HACE QUE SE IMPLEMENTE DECODEABLE Y CODEABLE
+struct WeatherData: Codable {
     let name: String
     let main: Main
     let weather: [Weather]
 }
 
-struct Main: Decodable {
+struct Main: Codable {
     let temp: Double
 }
 
-struct Weather: Decodable {
+struct Weather: Codable {
     let id: Int
 }

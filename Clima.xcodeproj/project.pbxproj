@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4976955628ED2DAE00B4FAB7 /* ApiKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4976955528ED2DAD00B4FAB7 /* ApiKey.swift */; };
 		4997584228E51EDD009741E1 /* DEBUG-Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4997584128E51EDD009741E1 /* DEBUG-Keys.plist */; };
 		4997584428E52DED009741E1 /* PROD-Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4997584328E52DED009741E1 /* PROD-Keys.plist */; };
 		4997584628E5562F009741E1 /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4997584528E5562F009741E1 /* WeatherData.swift */; };
@@ -28,6 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4976955528ED2DAD00B4FAB7 /* ApiKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKey.swift; sourceTree = "<group>"; };
 		4997584128E51EDD009741E1 /* DEBUG-Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DEBUG-Keys.plist"; sourceTree = "<group>"; };
 		4997584328E52DED009741E1 /* PROD-Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PROD-Keys.plist"; sourceTree = "<group>"; };
 		4997584528E5562F009741E1 /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
@@ -61,6 +63,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4976955428ED2D9300B4FAB7 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				4976955528ED2DAD00B4FAB7 /* ApiKey.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		49BDD98028E3FD1800310E71 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -97,6 +107,7 @@
 		ADAA27AF231BBFAF00365194 /* Clima */ = {
 			isa = PBXGroup;
 			children = (
+				4976955428ED2D9300B4FAB7 /* Common */,
 				ADAA27B0231BBFAF00365194 /* AppDelegate.swift */,
 				ADAA27B2231BBFAF00365194 /* SceneDelegate.swift */,
 				ADAA27CA231BC3FA00365194 /* Model */,
@@ -223,6 +234,7 @@
 				49BDD97F28E3F70500310E71 /* WeatherFetcherHttp.swift in Sources */,
 				49D48AF628E69228007B25B5 /* IconWeatherService.swift in Sources */,
 				49BDD97B28E3F61000310E71 /* WeatherService.swift in Sources */,
+				4976955628ED2DAE00B4FAB7 /* ApiKey.swift in Sources */,
 				49D48AF828E6AB37007B25B5 /* WeatherModel.swift in Sources */,
 				ADAA27B5231BBFAF00365194 /* WeatherViewController.swift in Sources */,
 				ADAA27B1231BBFAF00365194 /* AppDelegate.swift in Sources */,
