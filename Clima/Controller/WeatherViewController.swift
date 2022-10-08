@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import CoreLocation
 
 //UITextFieldDelefate es un protocol (interfaz)
-class WeatherViewController: UIViewController, UITextFieldDelegate, WeatherManagerDelegate {
+class WeatherViewController: UIViewController {
     
     @IBOutlet weak var conditionImageView: UIImageView!
     @IBOutlet weak var temperatureLabel: UILabel!
@@ -18,18 +19,49 @@ class WeatherViewController: UIViewController, UITextFieldDelegate, WeatherManag
     @IBOutlet weak var searchTextField: UITextField!
     
     var weatherFethcerHttp = WeatherFetcherHttp()
+    let locationManager = CLLocationManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         weatherFethcerHttp.delegate = self
         searchTextField.delegate = self
+        locationManager.delegate = self
+        
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.requestLocation()
     }
-
 
     @IBAction func searchPressed(_ sender: Any) {
         searchTextField.endEditing(true)
     }
     
+    @IBAction func locationButtonPressed(_ sender: UIButton) {
+        
+        locationManager.requestLocation()
+    }
+    
+    func showAlertEmtySearch(){
+        
+        // Create new Alert
+        let dialogMessage = UIAlertController(title: "Confirm", message: "Please, try type something", preferredStyle: .alert)
+         
+         // Create OK button with action handler
+         let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
+          })
+         
+         //Add OK button to a dialog message
+         dialogMessage.addAction(ok)
+         // Present Alert to
+         self.present(dialogMessage, animated: true, completion: nil)
+        
+    }
+        
+}
+
+//MARK: - UITextFieldDelegate
+
+extension WeatherViewController: UITextFieldDelegate {
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         if textField.text != "" {
             return true
@@ -55,25 +87,18 @@ class WeatherViewController: UIViewController, UITextFieldDelegate, WeatherManag
         
         searchTextField.text = ""
     }
-    
-    func showAlertEmtySearch(){
-        
-        // Create new Alert
-        let dialogMessage = UIAlertController(title: "Confirm", message: "Please, try type something", preferredStyle: .alert)
-         
-         // Create OK button with action handler
-         let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
-          })
-         
-         //Add OK button to a dialog message
-         dialogMessage.addAction(ok)
-         // Present Alert to
-         self.present(dialogMessage, animated: true, completion: nil)
-        
-    }
-    
-    func didUpdateWeather(_ weatherFetcherHttp: WeatherFetcherHttp ,weather: WeatherModel) {
-        
+}
+
+//MARK: - WeatherManagerDelegate
+
+extension WeatherViewController: WeatherManagerDelegate {
+    func didUpdateWeather(_ weatherFetcherHttp: WeatherFetcherHttp, weather: WeatherModel) {
+        print(weather)
+        DispatchQueue.main.async {
+            self.conditionImageView.image = UIImage(systemName: weather.conditionName)
+            self.temperatureLabel.text = weather.temperatureFormated
+            self.cityLabel.text = weather.cityName
+        }
     }
     
     func didFailWithError(_ error: Error) {
@@ -81,3 +106,23 @@ class WeatherViewController: UIViewController, UITextFieldDelegate, WeatherManag
     }
 }
 
+//MARK: - CLLocationManagerDelegate
+
+extension WeatherViewController: CLLocationManagerDelegate {
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.last {
+            
+            let lat = location.coordinate.latitude
+            let long = location.coordinate.longitude
+            
+            weatherFethcerHttp.fetch(lat: lat, long: long)
+            
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error.localizedDescription)
+    }
+    
+}

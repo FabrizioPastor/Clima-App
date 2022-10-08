@@ -18,6 +18,11 @@ struct WeatherFetcherHttp: WeatherFetcher {
         performRequest(with: urlString)
     }
     
+    func fetch(lat: Double, long: Double){
+        let urlString = prepareURL(lat: lat, long: long)
+        performRequest(with: urlString)
+    }
+    
     //REALIZA LA PETICION MEDIANTE URLSESSION Y REALIZA EL DECODE DE LA DATA DEVUELTA
     private func performRequest(with urlString: String) {
         
@@ -63,6 +68,9 @@ struct WeatherFetcherHttp: WeatherFetcher {
     
     //FORMATEA LA URL A LA QUE SE LE REALIZARÁ LA PETICION, ESTA ESTA ALOJADA EN CONSTANTS.SWIFT
     private func prepareURL(city: String) -> String {
-        return WEATHER_API_URL.replacingOccurrences(of: "{API key}", with: ENV.SERVICE_API_KEY).replacingOccurrences(of: "{city name}", with: city)
+        return URLS.WEATHER_API_URL.replacingOccurrences(of: "{API key}", with: ENV.SERVICE_API_KEY).replacingOccurrences(of: "{city name}", with: city)
+    }
+    private func prepareURL(lat: Double, long: Double) -> String {
+        return URLS.WEATHER_API_URL_COORDENATES.replacingOccurrences(of: "{API key}", with: ENV.SERVICE_API_KEY).replacingOccurrences(of: "{lat}", with: String(lat)).replacingOccurrences(of: "{lon}", with: String(long))
     }
 }
